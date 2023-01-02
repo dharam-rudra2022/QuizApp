@@ -1,5 +1,5 @@
 
-# Quiz App 
+# Quiz App (TypeScript)
 
 This app is developed in TypeScript React-Native Environment.
 This contains Splash Screen, Login Page, Register Screen, Forgot Password Screen and Quiz Module.
