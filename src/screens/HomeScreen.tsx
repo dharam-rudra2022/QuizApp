@@ -13,7 +13,7 @@ type Props = {
 const HomeScreen = ({ navigation }: Props) => (
   <Background>
     <Logo />
-    <Header>Login Template</Header>
+    <Header>Login</Header>
 
     <Paragraph>
       The easiest way to start with your amazing application.

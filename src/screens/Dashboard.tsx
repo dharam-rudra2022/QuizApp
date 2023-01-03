@@ -21,7 +21,7 @@ import { Icon } from 'react-native-elements';
    correctanswer:string
  }
  
- const Quiz: FC=(props) => {
+ const DashboardQuiz: FC=(props) => {
    const [loader,setloader]=useState(false)
    const [question,setquestion]=useState<Question[]>([])
    const [useranswers,setuseranswers]=useState<AnswerObject[]>([])
@@ -133,5 +133,5 @@ import { Icon } from 'react-native-elements';
 })
  
  
- export default Quiz;
+ export default DashboardQuiz;
  

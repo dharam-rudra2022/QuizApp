@@ -9,15 +9,21 @@ import BackButton from "../components/BackButton";
 import { theme } from '../core/theme';
 import { Navigation } from "../types";
 import { emailValidator, passwordValidator, nameValidator, } from "../core/utils";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 type Props = {
     navigation: Navigation;
 };
 
+let USER_KEY = 'user';
+
+
 const RegisterScreen = ({ navigation }: Props) => {
     const [name, setName] = useState({ value: '', error: '' });
     const [email, setEmail] = useState({ value: '', error: '' });
     const [password, setPassword] = useState({ value: '', error: '' });
+
 
     const _onSignUpPressed = () => {
         const nameError = nameValidator(name.value);
@@ -30,7 +36,14 @@ const RegisterScreen = ({ navigation }: Props) => {
             setPassword({ ...password, error: passwordError });
             return;
         }
-        navigation.navigate('Dashboard');
+        let user = {
+            userName:name,
+            userEmail:email,
+            userPassword:password
+        };
+
+        saveData(JSON.stringify(user),navigation);
+        
     }
 
     return (
@@ -99,5 +112,16 @@ const styles = StyleSheet.create({
         color:theme.colors.primary
     },
 });
+
+
+const saveData =async (userObj:any,navigation:Navigation) => {
+    try {
+        await AsyncStorage.setItem(USER_KEY,userObj)
+        navigation.navigate('LoginScreen');
+
+    } catch (error) {
+        throw 'Error'
+    }
+}
 
 export default memo(RegisterScreen);

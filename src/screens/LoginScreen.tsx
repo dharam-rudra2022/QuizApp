@@ -9,6 +9,7 @@ import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { emailValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = {
   navigation: Navigation;
@@ -27,8 +28,8 @@ const LoginScreen = ({ navigation }: Props) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
-
-    navigation.navigate('Dashboard');
+  
+    getLoginDetails(navigation,email.value,password.value)
   };
 
   return (
@@ -102,5 +103,26 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
 });
+
+async function getLoginDetails(navigation:Navigation,email:string,password:string):Promise<void> {
+  console.log("hello");
+    try {
+      const parsed = JSON.parse(await AsyncStorage.getItem('user'));  
+      const dbEmail = parsed.userEmail.value;
+      const dbPassword = parsed.userPassword.value;
+
+      if(email==dbEmail && password==dbPassword){
+        alert("Login Successfully")
+        navigation.navigate('Dashboard');
+      }
+      else {
+        alert("Invalid Credentials") 
+      }
+    } catch (error) {
+      alert(error);
+    }
+  
+  
+}
 
 export default memo(LoginScreen);

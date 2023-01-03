@@ -7,7 +7,7 @@ import {
   RegisterScreen,
   ForgotPasswordScreen,
   Dashboard,
-} from './screens';
+} from './navigation';
 
 const Router = createStackNavigator(
   {
